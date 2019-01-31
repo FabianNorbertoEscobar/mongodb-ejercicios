@@ -1,0 +1,30 @@
+>> listar nombre, apellido, modelo de vehículo, ordenados alfabéticamente por nombre y por apellido, de las personas que tengan vehículos con patente a vencerse desde el 2019 y modelo que comience con la letra f:
+
+
+
+en SQL:
+
+SELECT p.nombre, p.apellido, m.descripcion
+FROM persona p
+INNER JOIN vehiculo v ON p.vehiculo = v.id
+INNER JOIN modelo m ON v.modelo = m.id
+INNER JOIN patente t ON v.patente = t.id
+WHERE t.fecha_vencimiento >= 2019
+AND m.descripcion like "f%"
+ORDER BY p.nombre, p.apellido
+
+
+
+en mongoDB:
+
+db.personas.find({"vehiculo.patente.fecha_vencimiento":{$gte:2019},{"vehiculo.modelo":{$regex:/f$/}}},{nombre:true,apellido:true,"vehiculo.modelo":true,_id:false}).sort({nombre:1,apellido:1}).pretty()
+
+
+
+en XML:
+
+for $p in document("personas.xml")/personas/persona
+where $p/vehiculo/patente/fecha_vencimiento >= 2019
+and some $m in $p/vehiculo/modelo satisfies contains($m, "f%")
+order by $p/nombre, $p/apellido
+return <persona><nombre>{$p/nombre/data()}</nombre><apellido>{$p/apellido/data()}</apellido><modelo>{$p/vehiculo/modelo/data()}</modelo></persona>

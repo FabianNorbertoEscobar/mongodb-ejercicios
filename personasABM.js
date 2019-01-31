@@ -1,0 +1,10 @@
+use personasABM;
+db;
+db.createCollection("persona");
+show collections;
+db.persona.insert({dni: 123456789, nombre: "David", apellido: "Rin", estatura: 1.62, masa: 62.2});
+db.persona.insert({dni: 234567890, nombre: "Alejandro", apellido: "Loca", estatura: 1.70, masa: 73.2});
+db.persona.insert({dni: 345678901, nombre: "José", apellido: "Iotra", estatura: 1.76, masa: 78.2});
+db.persona.insert({dni: 456789012, nombre: "Caín", apellido: "Pobleta", estatura: 1.86, masa: 83.2});
+db.persona.insert({dni: 567890123, nombre: "Ivner", apellido: "Emsjic", estatura: 1.72, masa: 81.3});
+db.persona.find({});

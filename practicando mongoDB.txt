@@ -1,0 +1,2480 @@
+Windows PowerShell
+Copyright (C) 2013 Microsoft Corporation. Todos los derechos reservados.
+
+PS C:\Windows\system32> mongo
+2019-01-20T17:30:26.034-0300 I CONTROL  [main] Hotfix KB2731284 or later update is not installed, will zero-out data fil
+es
+MongoDB shell version: 3.2.22
+connecting to: test
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        http://docs.mongodb.org/
+Questions? Try the support group
+        http://groups.google.com/group/mongodb-user
+Server has startup warnings:
+2019-01-20T17:28:34.774-0300 I CONTROL  [initandlisten]
+2019-01-20T17:28:34.774-0300 I CONTROL  [initandlisten] ** WARNING: This 32-bit MongoDB binary is deprecated
+2019-01-20T17:28:34.775-0300 I CONTROL  [initandlisten]
+2019-01-20T17:28:34.775-0300 I CONTROL  [initandlisten]
+2019-01-20T17:28:34.775-0300 I CONTROL  [initandlisten] ** NOTE: This is a 32 bit MongoDB binary.
+2019-01-20T17:28:34.775-0300 I CONTROL  [initandlisten] **       32 bit builds are limited to less than 2GB of data (or
+less with --journal).
+2019-01-20T17:28:34.776-0300 I CONTROL  [initandlisten] **       Note that journaling defaults to off for 32 bit and is
+currently off.
+2019-01-20T17:28:34.778-0300 I CONTROL  [initandlisten] **       See http://dochub.mongodb.org/core/32bit
+2019-01-20T17:28:34.779-0300 I CONTROL  [initandlisten]
+> show dbs
+local  0.078GB
+> documento = {nombre: "Eduardo"}
+{ "nombre" : "Eduardo" }
+> documento
+{ "nombre" : "Eduardo" }
+> documento={String="Eduardo",
+... numero=22,
+... real=22.5,
+... flotante=true,
+... fecha=new Date()}
+2019-01-20T17:39:10.783-0300 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:17
+
+> documento={String:"Eduardo", numero:22, real:22.5, flotante:true, fecha:new Date()}
+{
+        "String" : "Eduardo",
+        "numero" : 22,
+        "real" : 22.5,
+        "flotante" : true,
+        "fecha" : ISODate("2019-01-20T20:39:40.365Z")
+}
+> documento
+{
+        "String" : "Eduardo",
+        "numero" : 22,
+        "real" : 22.5,
+        "flotante" : true,
+        "fecha" : ISODate("2019-01-20T20:39:40.365Z")
+}
+> var documento={String:"Eduardo", numero:22, real:22.5, flotante:true, fecha:new Date()}
+> documento
+{
+        "String" : "Eduardo",
+        "numero" : 22,
+        "real" : 22.5,
+        "flotante" : true,
+        "fecha" : ISODate("2019-01-20T20:40:40.313Z")
+}
+> otro={nombre:"Eduardo",pais:"México"}
+{ "nombre" : "Eduardo", "pais" : "México" }
+> show dbs
+local  0.078GB
+> use codigo_facilito;
+switched to db codigo_facilito
+> show dbs
+local  0.078GB
+> db
+codigo_facilito
+> usuario={nombre:"Test",edad:22}
+{ "nombre" : "Test", "edad" : 22 }
+> db.usuarios.insert(usuario)
+WriteResult({ "nInserted" : 1 })
+> db
+codigo_facilito
+> show dbs
+codigo_facilito  0.078GB
+local            0.078GB
+> show collections;
+system.indexes
+usuarios
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+> otro={nombre:"otro"}
+{ "nombre" : "otro" }
+> db.usuarios.insert(otro)
+WriteResult({ "nInserted" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+> db.usuarios.findOne()
+{
+        "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"),
+        "nombre" : "Test",
+        "edad" : 22
+}
+> var test = db.usuarios.findOne()
+> test
+{
+        "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"),
+        "nombre" : "Test",
+        "edad" : 22
+}
+> test_dos = db.usuarios.find({nombre:"otro"})
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+> var test_dos = db.usuarios.find({nombre:"otro"})
+> test_dos
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+> var test_dos = db.usuarios.find({edad:22})
+> test_dos
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+> eduardo={nombre:"Eduardo",edad:22}
+{ "nombre" : "Eduardo", "edad" : 22 }
+> eduardo={nombre:"Eduardo",edad:23}
+{ "nombre" : "Eduardo", "edad" : 23 }
+> eduardo
+{ "nombre" : "Eduardo", "edad" : 23 }
+> eduardo={nombre:"Eduardo",edad:22}
+{ "nombre" : "Eduardo", "edad" : 22 }
+> eduardo_dos={nombre:"Eduardo",edad:23}
+{ "nombre" : "Eduardo", "edad" : 23 }
+> db.usuarios.insert(eduardo)
+WriteResult({ "nInserted" : 1 })
+> db.usuarios.insert(eduardo_dos)
+WriteResult({ "nInserted" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+> eduardo_22 = db.usuarios.find({nombre:"Eduardo",edad:22})
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+> eduardo_22
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+> db.usuarios.find(edad:{$ne:22})
+2019-01-20T18:03:18.823-0300 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:21
+
+> db.usuarios.find({edad:{$ne:22}})
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+> db.usuarios.find({nombre:"test",edad:22})
+> db.usuarios.find({nombre:"Test",edad:22})
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+> db.usuarios.find({nombre:"Test",edad:{$ne:23}})
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+> uno = {nombre:"Test uno"}
+{ "nombre" : "Test uno" }
+> dos = {nombre:"Test dos"}
+{ "nombre" : "Test dos" }
+> uno
+{ "nombre" : "Test uno" }
+> dos
+{ "nombre" : "Test dos" }
+> db.usuarios.insert([uno, dos])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Test uno" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "Test dos" }
+> var test = db.usuarios.findOne({nombre:"Test uno"})
+> test
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Test uno" }
+> test.nombre
+Test uno
+> test.nombre = "Cambio de nombre"
+Cambio de nombre
+> test
+{
+        "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"),
+        "nombre" : "Cambio de nombre"
+}
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Test uno" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "Test dos" }
+> db.usuarios.save(test)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "Test dos" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Cambio de nombre" }
+> save_prueba = {nombre:"esto es una prueba de save"}
+{ "nombre" : "esto es una prueba de save" }
+> db.usuarios.save(save_prueba)
+WriteResult({ "nInserted" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "Test dos" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Cambio de nombre" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "esto es una prueba de save" }
+> test= db.usuarios.findOne({nombre:"Test uno"})
+null
+> test= db.usuarios.findOne({nombre:"Test dos"})
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "Test dos" }
+> test.nombre="podemos actualizar el nombre"
+podemos actualizar el nombre
+> test.nombre
+podemos actualizar el nombre
+> test
+{
+        "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"),
+        "nombre" : "podemos actualizar el nombre"
+}
+> test.edad = 22
+22
+> test
+{
+        "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"),
+        "nombre" : "podemos actualizar el nombre",
+        "edad" : 22
+}
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "Test dos" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Cambio de nombre" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "esto es una prueba de save" }
+> db.usuarios.update({nombre:"Test dos"}, test)
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Cambio de nombre" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "esto es una prueba de save" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "podemos actualizar el nombre", "edad" : 22 }
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "Test", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "otro" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "Eduardo", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "Eduardo", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "Cambio de nombre" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "esto es una prueba de save" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "podemos actualizar el nombre", "edad" : 22 }
+> db.usuarios.update({nombre:"%T%"}, {set:{nombre:"CF"}},{multi:true})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 0,
+        "nModified" : 0,
+        "writeError" : {
+                "code" : 9,
+                "errmsg" : "multi update only works with $ operators"
+        }
+})
+> db.usuarios.update({nombre:"Test"}, {set:{nombre:"CF"}},{multi:true})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 0,
+        "nModified" : 0,
+        "writeError" : {
+                "code" : 9,
+                "errmsg" : "multi update only works with $ operators"
+        }
+})
+> db.usuarios.update({nombre:"Test"}, {$set:{nombre:"CF"}},{multi:true})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.update({nombre:"%t%"}, {$set:{nombre:"CF"}},{multi:true})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.usuarios.update({}, {$set:{nombre:"CF"}},{multi:true})
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 6 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "CF", "edad" : 22 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "CF" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "CF", "edad" : 22 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "CF", "edad" : 23 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "CF" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "CF" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "CF", "edad" : 22 }
+> db.usuarios.update({}, {$set:{edad:"27"}},{multi:true})
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 7 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "CF", "edad" : "27" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "CF", "edad" : "27" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "CF", "edad" : "27" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "CF", "edad" : "27" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "CF", "edad" : "27" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "CF", "edad" : "27" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "CF", "edad" : "27" }
+> db.usuarios.update({}, {$set:{edad:"28", example:56}},{multi:true})
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 7 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "CF", "edad" : "28", "example" : 56 }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "CF", "edad" : "28", "example" : 56 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "CF", "edad" : "28", "example" : 56 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "CF", "edad" : "28", "example" : 56 }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "CF", "edad" : "28", "example" : 56 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "CF", "edad" : "28", "example" : 56 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "CF", "edad" : "28", "example" : 56 }
+> db.usuarios.update({}, {$set:{edad:"28", example:86}},{multi:true})
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 7 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "CF", "edad" : "28", "example" : 86 }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "CF", "edad" : "28", "example" : 86 }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "CF", "edad" : "28", "example" : 86 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "CF", "edad" : "28", "example" : 86 }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "CF", "edad" : "28", "example" : 86 }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "CF", "edad" : "28", "example" : 86 }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "CF", "edad" : "28", "example" : 86 }
+> db.usuarios.update({}, {$unset:{example:86}},{multi:true})
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 7 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "CF", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "CF", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "CF", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "CF", "edad" : "28" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "CF", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "CF", "edad" : "28" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "CF", "edad" : "28" }
+> db.usuarios.update({},{$set:{nombre:"FB"}}, {multi_true})
+2019-01-20T18:33:46.547-0300 E QUERY    [thread1] ReferenceError: multi_true is not defined :
+@(shell):1:46
+
+> db.usuarios.update({},{$set:{nombre:"FB"}}, {multi:true})
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 7 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "FB", "edad" : "28" }
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "FB", "edad" : "28" }
+> unos={nombre:"uno"}
+{ "nombre" : "uno" }
+> dos={nombre:"dos"}
+{ "nombre" : "dos" }
+> tres={nombre:"tres"}
+{ "nombre" : "tres" }
+> unos
+{ "nombre" : "uno" }
+> dos
+{ "nombre" : "dos" }
+> tres
+{ "nombre" : "tres" }
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "FB", "edad" : "28" }
+> db.usuarios.insert([uno, dos, tres])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 3,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e9ec7bf7b0ef6f78b806"), "nombre" : "Test uno" }
+{ "_id" : ObjectId("5c44e9ec7bf7b0ef6f78b807"), "nombre" : "dos" }
+{ "_id" : ObjectId("5c44e9ec7bf7b0ef6f78b808"), "nombre" : "tres" }
+> db.usuarios.remove({nombre:"Test uno"})
+WriteResult({ "nRemoved" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "FB", "edad" : "28" }
+{ "_id" : ObjectId("5c44e9ec7bf7b0ef6f78b807"), "nombre" : "dos" }
+{ "_id" : ObjectId("5c44e9ec7bf7b0ef6f78b808"), "nombre" : "tres" }
+> db.usuarios.update({},{$set:{nombre="iguales"}}, {multi:true})
+2019-01-20T18:38:39.406-0300 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:35
+
+> db.usuarios.update({},{$set:{nombre:"iguales"}}, {multi:true})
+WriteResult({ "nMatched" : 9, "nUpserted" : 0, "nModified" : 9 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44de027bf7b0ef6f78b7ff"), "nombre" : "iguales", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b27bf7b0ef6f78b801"), "nombre" : "iguales", "edad" : "28" }
+{ "_id" : ObjectId("5c44e0b67bf7b0ef6f78b802"), "nombre" : "iguales", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b803"), "nombre" : "iguales", "edad" : "28" }
+{ "_id" : ObjectId("5c44e42f7bf7b0ef6f78b805"), "nombre" : "iguales", "edad" : "28" }
+{ "_id" : ObjectId("5c44e3237bf7b0ef6f78b804"), "nombre" : "iguales", "edad" : "28" }
+{ "_id" : ObjectId("5c44df167bf7b0ef6f78b800"), "nombre" : "iguales", "edad" : "28" }
+{ "_id" : ObjectId("5c44e9ec7bf7b0ef6f78b807"), "nombre" : "iguales" }
+{ "_id" : ObjectId("5c44e9ec7bf7b0ef6f78b808"), "nombre" : "iguales" }
+> db.usuarios.remove()
+2019-01-20T18:39:40.442-0300 E QUERY    [thread1] Error: remove needs a query :
+DBCollection.prototype._parseRemove@src/mongo/shell/collection.js:406:1
+DBCollection.prototype.remove@src/mongo/shell/collection.js:433:18
+@(shell):1:1
+
+> db.usuarios.remove({})
+WriteResult({ "nRemoved" : 9 })
+> db.usuarios.find()
+> uno
+{ "nombre" : "Test uno" }
+> db.usuarios.insert(uno)
+WriteResult({ "nInserted" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44eabe7bf7b0ef6f78b809"), "nombre" : "Test uno" }
+> db.usuarios.remove({})
+WriteResult({ "nRemoved" : 1 })
+> db.usuarios.find()
+> db.usuarios.drop()
+true
+> show collections
+system.indexes
+> show collections;
+system.indexes
+> db
+codigo_facilito
+> db
+codigo_facilito
+> db.dropDatabase()
+{ "dropped" : "codigo_facilito", "ok" : 1 }
+> db
+codigo_facilito
+> show dbs
+local  0.078GB
+> show dbs
+local  0.078GB
+> use biblioteca
+switched to db biblioteca
+> db
+biblioteca
+> show dbs
+local  0.078GB
+> db
+biblioteca
+> db
+biblioteca
+> db.insert(libros)
+2019-01-20T18:47:07.728-0300 E QUERY    [thread1] ReferenceError: libros is not defined :
+@(shell):1:1
+
+> db
+biblioteca
+> show collections
+> db.createCollection(libros)
+2019-01-20T18:47:40.603-0300 E QUERY    [thread1] ReferenceError: libros is not defined :
+@(shell):1:1
+
+> libros
+2019-01-20T18:47:46.827-0300 E QUERY    [thread1] ReferenceError: libros is not defined :
+@(shell):1:1
+
+> db.createCollection('libros')
+{ "ok" : 1 }
+> db
+biblioteca
+> show collections
+libros
+system.indexes
+> db.libros
+biblioteca.libros
+> db.libros.find()
+> libro={nombre:"Hamlet"}
+{ "nombre" : "Hamlet" }
+> db.libros.insert(libro)
+WriteResult({ "nInserted" : 1 })
+> db.libros.find()
+{ "_id" : ObjectId("5c44ed8b7bf7b0ef6f78b80a"), "nombre" : "Hamlet" }
+> db.libros.insert({nombre:"Macbeth"})
+WriteResult({ "nInserted" : 1 })
+> db.libros.find()
+{ "_id" : ObjectId("5c44ed8b7bf7b0ef6f78b80a"), "nombre" : "Hamlet" }
+{ "_id" : ObjectId("5c44edb77bf7b0ef6f78b80b"), "nombre" : "Macbeth" }
+> db.libros.insert({nombre:"Otelo"})
+WriteResult({ "nInserted" : 1 })
+> db.libros.insert({nombre:"Romeo y Julieta"})
+WriteResult({ "nInserted" : 1 })
+> db.libros.insert({nombre:"El mercader de Venecia"})
+WriteResult({ "nInserted" : 1 })
+> db.libros.insert({nombre:"El rey Lear"})
+WriteResult({ "nInserted" : 1 })
+> db.libros.insert({nombre:"Antinio y Cleopatra"})
+WriteResult({ "nInserted" : 1 })
+> db.libros.find()
+{ "_id" : ObjectId("5c44ed8b7bf7b0ef6f78b80a"), "nombre" : "Hamlet" }
+{ "_id" : ObjectId("5c44edb77bf7b0ef6f78b80b"), "nombre" : "Macbeth" }
+{ "_id" : ObjectId("5c44edc07bf7b0ef6f78b80c"), "nombre" : "Otelo" }
+{ "_id" : ObjectId("5c44edcb7bf7b0ef6f78b80d"), "nombre" : "Romeo y Julieta" }
+{ "_id" : ObjectId("5c44eddf7bf7b0ef6f78b80e"), "nombre" : "El mercader de Venecia" }
+{ "_id" : ObjectId("5c44edf57bf7b0ef6f78b80f"), "nombre" : "El rey Lear" }
+{ "_id" : ObjectId("5c44edfe7bf7b0ef6f78b810"), "nombre" : "Antinio y Cleopatra" }
+> db.libros.update({nombre:"Antinio y Cleopatra"}, {$set:{nombre:"Antonio y Cleopatra"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.libros.find()
+{ "_id" : ObjectId("5c44ed8b7bf7b0ef6f78b80a"), "nombre" : "Hamlet" }
+{ "_id" : ObjectId("5c44edb77bf7b0ef6f78b80b"), "nombre" : "Macbeth" }
+{ "_id" : ObjectId("5c44edc07bf7b0ef6f78b80c"), "nombre" : "Otelo" }
+{ "_id" : ObjectId("5c44edcb7bf7b0ef6f78b80d"), "nombre" : "Romeo y Julieta" }
+{ "_id" : ObjectId("5c44eddf7bf7b0ef6f78b80e"), "nombre" : "El mercader de Venecia" }
+{ "_id" : ObjectId("5c44edf57bf7b0ef6f78b80f"), "nombre" : "El rey Lear" }
+{ "_id" : ObjectId("5c44edfe7bf7b0ef6f78b810"), "nombre" : "Antonio y Cleopatra" }
+> db.libros.update({}, {$set:{autor:"William Shakespeare"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.libros.find()
+{ "_id" : ObjectId("5c44edb77bf7b0ef6f78b80b"), "nombre" : "Macbeth" }
+{ "_id" : ObjectId("5c44edc07bf7b0ef6f78b80c"), "nombre" : "Otelo" }
+{ "_id" : ObjectId("5c44edcb7bf7b0ef6f78b80d"), "nombre" : "Romeo y Julieta" }
+{ "_id" : ObjectId("5c44eddf7bf7b0ef6f78b80e"), "nombre" : "El mercader de Venecia" }
+{ "_id" : ObjectId("5c44edf57bf7b0ef6f78b80f"), "nombre" : "El rey Lear" }
+{ "_id" : ObjectId("5c44edfe7bf7b0ef6f78b810"), "nombre" : "Antonio y Cleopatra" }
+{ "_id" : ObjectId("5c44ed8b7bf7b0ef6f78b80a"), "nombre" : "Hamlet", "autor" : "William Shakespeare" }
+> db.libros.update({}, {$set:{autor:"William Shakespeare"}}, {multi:true})
+WriteResult({ "nMatched" : 7, "nUpserted" : 0, "nModified" : 6 })
+> db.libros.find()
+{ "_id" : ObjectId("5c44edcb7bf7b0ef6f78b80d"), "nombre" : "Romeo y Julieta", "autor" : "William Shakespeare" }
+{ "_id" : ObjectId("5c44eddf7bf7b0ef6f78b80e"), "nombre" : "El mercader de Venecia", "autor" : "William Shakespeare" }
+{ "_id" : ObjectId("5c44edfe7bf7b0ef6f78b810"), "nombre" : "Antonio y Cleopatra", "autor" : "William Shakespeare" }
+{ "_id" : ObjectId("5c44ed8b7bf7b0ef6f78b80a"), "nombre" : "Hamlet", "autor" : "William Shakespeare" }
+{ "_id" : ObjectId("5c44edb77bf7b0ef6f78b80b"), "nombre" : "Macbeth", "autor" : "William Shakespeare" }
+{ "_id" : ObjectId("5c44edc07bf7b0ef6f78b80c"), "nombre" : "Otelo", "autor" : "William Shakespeare" }
+{ "_id" : ObjectId("5c44edf57bf7b0ef6f78b80f"), "nombre" : "El rey Lear", "autor" : "William Shakespeare" }
+> db.libros.find({nombre:1})
+> db.libros.find({},{nombre:1})
+{ "_id" : ObjectId("5c44edcb7bf7b0ef6f78b80d"), "nombre" : "Romeo y Julieta" }
+{ "_id" : ObjectId("5c44eddf7bf7b0ef6f78b80e"), "nombre" : "El mercader de Venecia" }
+{ "_id" : ObjectId("5c44edfe7bf7b0ef6f78b810"), "nombre" : "Antonio y Cleopatra" }
+{ "_id" : ObjectId("5c44ed8b7bf7b0ef6f78b80a"), "nombre" : "Hamlet" }
+{ "_id" : ObjectId("5c44edb77bf7b0ef6f78b80b"), "nombre" : "Macbeth" }
+{ "_id" : ObjectId("5c44edc07bf7b0ef6f78b80c"), "nombre" : "Otelo" }
+{ "_id" : ObjectId("5c44edf57bf7b0ef6f78b80f"), "nombre" : "El rey Lear" }
+> db.libros.find({},{nombre:1, _id:0})
+{ "nombre" : "Romeo y Julieta" }
+{ "nombre" : "El mercader de Venecia" }
+{ "nombre" : "Antonio y Cleopatra" }
+{ "nombre" : "Hamlet" }
+{ "nombre" : "Macbeth" }
+{ "nombre" : "Otelo" }
+{ "nombre" : "El rey Lear" }
+> operadores
+2019-01-20T18:59:29.840-0300 E QUERY    [thread1] ReferenceError: operadores is not defined :
+@(shell):1:1
+
+> db.libros.find({fecha:{$gte:2000, $lte:2005},{nombre:1, _id:0})
+...
+... }
+2019-01-20T19:04:08.009-0300 E QUERY    [thread1] SyntaxError: invalid property id @(shell):1:45
+
+> db.libros.find({fecha:{$gte:2000, $lte:2005}},{nombre:1, _id:0})  }
+2019-01-20T19:04:33.265-0300 E QUERY    [thread1] SyntaxError: expected expression, got '}' @(shell):1:66
+
+> db.libros.find({fecha:{$gte:2000, $lte:2005}},{nombre:1, _id:0})
+> db
+biblioteca
+> show dbs
+biblioteca  0.078GB
+local       0.078GB
+> db
+biblioteca
+> use test
+switched to db test
+> db
+test
+> db.createCollection('test')
+{ "ok" : 1 }
+> db
+test
+> db.test
+test.test
+> db.test.find()
+> for(i=0;i<100;i++){db.test.insert({valor:i})}
+WriteResult({ "nInserted" : 1 })
+> db.test.find()
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 0 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 1 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 2 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 3 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 4 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 5 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 6 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 7 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 8 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 9 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 10 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 11 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 12 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 13 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 14 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 15 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 16 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 17 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 18 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 19 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b825"), "valor" : 20 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b826"), "valor" : 21 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b827"), "valor" : 22 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b828"), "valor" : 23 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b829"), "valor" : 24 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82a"), "valor" : 25 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82b"), "valor" : 26 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82c"), "valor" : 27 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82d"), "valor" : 28 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82e"), "valor" : 29 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82f"), "valor" : 30 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b830"), "valor" : 31 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b831"), "valor" : 32 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b832"), "valor" : 33 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b833"), "valor" : 34 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b834"), "valor" : 35 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b835"), "valor" : 36 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b836"), "valor" : 37 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b837"), "valor" : 38 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b838"), "valor" : 39 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b839"), "valor" : 40 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83a"), "valor" : 41 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83b"), "valor" : 42 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83c"), "valor" : 43 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83d"), "valor" : 44 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83e"), "valor" : 45 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83f"), "valor" : 46 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b840"), "valor" : 47 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b841"), "valor" : 48 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b842"), "valor" : 49 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b843"), "valor" : 50 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b844"), "valor" : 51 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b845"), "valor" : 52 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b846"), "valor" : 53 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b847"), "valor" : 54 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b848"), "valor" : 55 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b849"), "valor" : 56 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84a"), "valor" : 57 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84b"), "valor" : 58 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84c"), "valor" : 59 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84d"), "valor" : 60 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84e"), "valor" : 61 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84f"), "valor" : 62 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b850"), "valor" : 63 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b851"), "valor" : 64 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b852"), "valor" : 65 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b853"), "valor" : 66 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b854"), "valor" : 67 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b855"), "valor" : 68 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b856"), "valor" : 69 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b857"), "valor" : 70 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b858"), "valor" : 71 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b859"), "valor" : 72 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85a"), "valor" : 73 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85b"), "valor" : 74 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85c"), "valor" : 75 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85d"), "valor" : 76 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85e"), "valor" : 77 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85f"), "valor" : 78 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b860"), "valor" : 79 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b861"), "valor" : 80 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b862"), "valor" : 81 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b863"), "valor" : 82 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b864"), "valor" : 83 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b865"), "valor" : 84 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b866"), "valor" : 85 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b867"), "valor" : 86 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b868"), "valor" : 87 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b869"), "valor" : 88 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86a"), "valor" : 89 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86b"), "valor" : 90 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86c"), "valor" : 91 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86d"), "valor" : 92 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86e"), "valor" : 93 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86f"), "valor" : 94 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b870"), "valor" : 95 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b871"), "valor" : 96 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b872"), "valor" : 97 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b873"), "valor" : 98 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b874"), "valor" : 99 }
+>
+> var cursor = db.test.find()
+> cursor
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 0 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 1 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 2 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 3 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 4 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 5 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 6 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 7 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 8 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 9 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 10 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 11 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 12 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 13 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 14 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 15 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 16 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 17 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 18 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 19 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b825"), "valor" : 20 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b826"), "valor" : 21 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b827"), "valor" : 22 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b828"), "valor" : 23 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b829"), "valor" : 24 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82a"), "valor" : 25 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82b"), "valor" : 26 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82c"), "valor" : 27 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82d"), "valor" : 28 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82e"), "valor" : 29 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82f"), "valor" : 30 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b830"), "valor" : 31 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b831"), "valor" : 32 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b832"), "valor" : 33 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b833"), "valor" : 34 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b834"), "valor" : 35 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b835"), "valor" : 36 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b836"), "valor" : 37 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b837"), "valor" : 38 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b838"), "valor" : 39 }
+Type "it" for more
+>
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b839"), "valor" : 40 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83a"), "valor" : 41 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83b"), "valor" : 42 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83c"), "valor" : 43 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83d"), "valor" : 44 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83e"), "valor" : 45 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83f"), "valor" : 46 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b840"), "valor" : 47 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b841"), "valor" : 48 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b842"), "valor" : 49 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b843"), "valor" : 50 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b844"), "valor" : 51 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b845"), "valor" : 52 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b846"), "valor" : 53 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b847"), "valor" : 54 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b848"), "valor" : 55 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b849"), "valor" : 56 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84a"), "valor" : 57 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84b"), "valor" : 58 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84c"), "valor" : 59 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84d"), "valor" : 60 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84e"), "valor" : 61 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84f"), "valor" : 62 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b850"), "valor" : 63 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b851"), "valor" : 64 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b852"), "valor" : 65 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b853"), "valor" : 66 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b854"), "valor" : 67 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b855"), "valor" : 68 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b856"), "valor" : 69 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b857"), "valor" : 70 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b858"), "valor" : 71 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b859"), "valor" : 72 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85a"), "valor" : 73 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85b"), "valor" : 74 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85c"), "valor" : 75 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85d"), "valor" : 76 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85e"), "valor" : 77 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85f"), "valor" : 78 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b860"), "valor" : 79 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b861"), "valor" : 80 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b862"), "valor" : 81 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b863"), "valor" : 82 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b864"), "valor" : 83 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b865"), "valor" : 84 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b866"), "valor" : 85 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b867"), "valor" : 86 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b868"), "valor" : 87 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b869"), "valor" : 88 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86a"), "valor" : 89 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86b"), "valor" : 90 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86c"), "valor" : 91 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86d"), "valor" : 92 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86e"), "valor" : 93 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86f"), "valor" : 94 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b870"), "valor" : 95 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b871"), "valor" : 96 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b872"), "valor" : 97 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b873"), "valor" : 98 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b874"), "valor" : 99 }
+>
+>
+>
+> cursor
+> var cursor = db.test.find({valor:{$gt:98}})
+> cursor
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b874"), "valor" : 99 }
+> cursor
+> var cursor = db.test.find()
+> cursor.forEach(function(d){print(d)}
+... )
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+> var cursor = db.test.find()
+> cursor.forEach(function(d){d.valor=100;db.test.save(d);})
+> var cursor = db.test.find()
+> cursor.forEach(function(d){print(d)} )
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+[object BSON]
+> cursor.forEach(function(d){print(d.valor)} )
+> var cursor = db.test.find()
+> cursor.forEach(function(d){print(d.valor)} )
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+100
+> db.test.find()
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b825"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b826"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b827"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b828"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b829"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b830"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b831"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b832"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b833"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b834"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b835"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b836"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b837"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b838"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b839"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b840"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b841"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b842"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b843"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b844"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b845"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b846"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b847"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b848"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b849"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84c"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b850"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b851"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b852"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b853"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b854"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b855"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b856"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b857"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b858"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b859"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b860"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b861"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b862"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b863"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b864"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b865"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b866"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b867"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b868"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b869"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b870"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b871"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b872"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b873"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b874"), "valor" : 100 }
+> it
+no cursor
+>
+>
+>
+> db.test.find()
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 100 }
+Type "it" for more
+> db.test.find().count()
+100
+> db.test.find().max()
+Error: error: {
+        "waitedMS" : NumberLong(0),
+        "ok" : 0,
+        "errmsg" : "Failed to parse: max: undefined. 'max' field must be of BSON type Object.",
+        "code" : 9
+}
+> db.test.find().sort({valor:1})
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 100 }
+Type "it" for more
+> db.test.find().sort({valor:-1})
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 100 }
+Type "it" for more
+> db.test.find().sort({valor:-1}).limit(3)
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 100 }
+> db.test.find().sort({valor:1}).skip(1).limit(1)
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+> db.test.find().sort({valor:1}).skip(1).limit(1).count()
+100
+> db.test.find().sort({valor:1}).skip(1).limit(1)
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+> db.test.find().sort({valor:1}).skip(1).size()
+99
+> db.test.find().sort({valor:1}).skip(1),limit()
+2019-01-20T19:24:12.085-0300 E QUERY    [thread1] ReferenceError: limit is not defined :
+@(shell):1:40
+
+> db.test.find().sort({valor:1}).skip(1).limit(1)
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+>
+>
+>
+>
+>
+> var arreglo = [1, 2, 3]
+> arreglo
+[ 1, 2, 3 ]
+> var usuario ={nombre: "test", valores: arreglo}
+> db
+test
+> use usuarios
+switched to db usuarios
+> db
+usuarios
+> db.createCollection('usuarios')
+{ "ok" : 1 }
+> db
+usuarios
+> db.usuarios.find()
+> db.usuarios.insert(usuario)
+WriteResult({ "nInserted" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3 ] }
+> show dbs
+biblioteca  0.078GB
+local       0.078GB
+test        0.078GB
+usuarios    0.078GB
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3 ] }
+> db.usuarios.update({},{$addToSet:{valores:4}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4 ] }
+> db.usuarios.update({},{$addToSet:{valores:4}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4 ] }
+> db.usuarios.update({},{$push:{valores:4}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4 ] }
+> db.usuarios.update({},{$poll:{valores:4}})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 0,
+        "nModified" : 0,
+        "writeError" : {
+                "code" : 9,
+                "errmsg" : "Unknown modifier: $poll"
+        }
+})
+> db.usuarios.update({},{$unpush:{valores:4}})
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 0,
+        "nModified" : 0,
+        "writeError" : {
+                "code" : 9,
+                "errmsg" : "Unknown modifier: $unpush"
+        }
+})
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4 ] }
+> db.usuarios.update({},{$push:{valores:{$each:[5, 6]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6 ] }
+> db.usuarios.update({},{$addToSet:{valores:{$each:[5, 6]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6 ] }
+> db.usuarios.update({},{$addToSet:{valores:{$each:[6,7]}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7 ] }
+> db.usuarios.update({},{$addToSet:{valores:{$each:[100,101], $position:4}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7, 100, 101 ] }
+> db.usuarios.update({},{$push:{valores:{$each:[100,101], $position:4}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 100, 101, 4, 5, 6, 7, 100,
+101 ] }
+> db.usuarios.update({},{$push:{valores:{$each:[95,97], $sort:1}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7, 95, 97, 100, 10
+0, 101, 101 ] }
+> db.usuarios.update({},{$push:{valores:{$each:[], $sort:1}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7, 95, 97, 100, 10
+0, 101, 101 ] }
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7, 95, 97, 100, 10
+0, 101, 101 ] }
+> db.usuarios.update({},{$pull:{valores:65}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7, 95, 97, 100, 10
+0, 101, 101 ] }
+> db.usuarios.update({},{$pull:{valores:95}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7, 97, 100, 100, 1
+01, 101 ] }
+> db.usuarios.update({},{$pull:{valores:{$gt:50}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 1, 2, 3, 4, 4, 5, 6, 7 ] }
+> db.usuarios.update({},{$pullAll:{valores:[1,2]}}})
+2019-01-20T19:41:12.051-0300 E QUERY    [thread1] SyntaxError: missing ) after argument list @(shell):1:48
+
+> db.usuarios.update({},{$pullAll:{valores:[1,2]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 3, 4, 4, 5, 6, 7 ] }
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test", "valores" : [ 3, 4, 4, 5, 6, 7 ] }
+> db.usuarios.update({},{$unset:valores})
+2019-01-20T19:43:18.600-0300 E QUERY    [thread1] ReferenceError: valores is not defined :
+@(shell):1:24
+
+> db.usuarios.update({},{$unset:{valores:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "test" }
+> db.usuarios.update({},{$set:{nombre:"Eduardo"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "Eduardo" }
+> db.usuarios.update({},{$set:{ejemplo:["MongoDB", "C#", "SQL", "Java", "Python"]}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "Eduardo", "ejemplo" : [ "MongoDB", "C#", "SQL", "Java", "Pyt
+hon" ] }
+> db.usuarios.find({},{ejemplo:true, _id:false})
+{ "ejemplo" : [ "MongoDB", "C#", "SQL", "Java", "Python" ] }
+> db.usuarios.find({},{_id:false, ejemplo:{$slice:3}})
+{ "nombre" : "Eduardo", "ejemplo" : [ "MongoDB", "C#", "SQL" ] }
+> db.usuarios.find({},{_id:false, ejemplo:{$slice:1}})
+{ "nombre" : "Eduardo", "ejemplo" : [ "MongoDB" ] }
+> db.usuarios.find({},{_id:false, ejemplo:{$slice:-1}})
+{ "nombre" : "Eduardo", "ejemplo" : [ "Python" ] }
+> db.usuarios.find({},{_id:false, ejemplo:{$slice:[1,3]}})
+{ "nombre" : "Eduardo", "ejemplo" : [ "C#", "SQL", "Java" ] }
+> db.usuarios.find({},{_id:false, nombre:false, ejemplo:{$slice:[1,3]}})
+{ "ejemplo" : [ "C#", "SQL", "Java" ] }
+> db.usuarios.find({ejemplo:{$in:["MongoDB"]}},{_id:false, nombre:false, ejemplo:{$slice:[1,3]}})
+{ "ejemplo" : [ "C#", "SQL", "Java" ] }
+> db.usuarios.find({ejemplo:{$in:["XML"]}},{_id:false, nombre:false, ejemplo:{$slice:[1,3]}})
+> db.usuarios.find({ejemplo:{$in:["XML", "MongoDB"]}},{_id:false, nombre:false, ejemplo:{$slice:[1,3]}})
+{ "ejemplo" : [ "C#", "SQL", "Java" ] }
+> db.usuarios.find({ejemplo:{$nin:["XML", "MongoDB"]}},{_id:false, nombre:false, ejemplo:{$slice:[1,3]}})
+> db.usuarios.find({ejemplo:{$nin:["XML"]}},{_id:false, nombre:false, ejemplo:{$slice:[1,3]}})
+{ "ejemplo" : [ "C#", "SQL", "Java" ] }
+> var dos={nombre:"dos",ejemplo:["XML", "Go"]}
+> dos
+{ "nombre" : "dos", "ejemplo" : [ "XML", "Go" ] }
+> db.usuarios.insert(dos)
+WriteResult({ "nInserted" : 1 })
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "Eduardo", "ejemplo" : [ "MongoDB", "C#", "SQL", "Java", "Pyt
+hon" ] }
+{ "_id" : ObjectId("5c44fc157bf7b0ef6f78b876"), "nombre" : "dos", "ejemplo" : [ "XML", "Go" ] }
+> db.usuarios.find({ejemplo:{$nin:["C#"]}},{_id:false, nombre:false, ejemplo:{$slice:[1,3]}})
+{ "ejemplo" : [ "Go" ] }
+>
+>
+>
+> use items
+switched to db items
+> db
+items
+> db.createCollection('items')
+{ "ok" : 1 }
+> db.items.insert({item:"caja",valor:100,existencia:20})
+WriteResult({ "nInserted" : 1 })
+> db.items.insert({item:"caja",valor:50,existencia:25})
+WriteResult({ "nInserted" : 1 })
+> db.items.insert({item:"latas",valor:450,existencia:20})
+WriteResult({ "nInserted" : 1 })
+> db.items.insert({item:"botellas",valor:50,existencia:150})
+WriteResult({ "nInserted" : 1 })
+> db.items.find()
+{ "_id" : ObjectId("5c44fd0d7bf7b0ef6f78b877"), "item" : "caja", "valor" : 100, "existencia" : 20 }
+{ "_id" : ObjectId("5c44fd1f7bf7b0ef6f78b878"), "item" : "caja", "valor" : 50, "existencia" : 25 }
+{ "_id" : ObjectId("5c44fd2c7bf7b0ef6f78b879"), "item" : "latas", "valor" : 450, "existencia" : 20 }
+{ "_id" : ObjectId("5c44fd397bf7b0ef6f78b87a"), "item" : "botellas", "valor" : 50, "existencia" : 150 }
+>
+>
+> db.items.aggregate([{$group:{_id:"$item"}}])
+{ "_id" : "botellas" }
+{ "_id" : "latas" }
+{ "_id" : "caja" }
+>
+> db.items.aggregate([{$group:{_id:"$item", "repeticiones":{$sum:true}}}])
+{ "_id" : "botellas", "repeticiones" : 0 }
+{ "_id" : "latas", "repeticiones" : 0 }
+{ "_id" : "caja", "repeticiones" : 0 }
+> db.items.aggregate([{$group:{_id:"$item", "repeticiones":{$sum:1}}}])
+{ "_id" : "botellas", "repeticiones" : 1 }
+{ "_id" : "latas", "repeticiones" : 1 }
+{ "_id" : "caja", "repeticiones" : 2 }
+> db.items.aggregate([{$group:{_id:"$item", "repeticiones":{$sum:1}, "suma":{$sum:"$valor"}}}])
+{ "_id" : "botellas", "repeticiones" : 1, "suma" : 50 }
+{ "_id" : "latas", "repeticiones" : 1, "suma" : 450 }
+{ "_id" : "caja", "repeticiones" : 2, "suma" : 150 }
+> db.items.aggregate([{$group:{_id:"$item", "repeticiones":{$sum:1}, "suma_valor":{$sum:"$valor"}}}])
+{ "_id" : "botellas", "repeticiones" : 1, "suma_valor" : 50 }
+{ "_id" : "latas", "repeticiones" : 1, "suma_valor" : 450 }
+{ "_id" : "caja", "repeticiones" : 2, "suma_valor" : 150 }
+> db.items.aggregate([{$group:{_id:"$item", "repeticiones":{$sum:1}, "suma_valor":{$sum:"$valor"}, "promedio":{$avg:"$va
+lor"}}}])
+{ "_id" : "botellas", "repeticiones" : 1, "suma_valor" : 50, "promedio" : 50 }
+{ "_id" : "latas", "repeticiones" : 1, "suma_valor" : 450, "promedio" : 450 }
+{ "_id" : "caja", "repeticiones" : 2, "suma_valor" : 150, "promedio" : 75 }
+>
+>
+>
+> use correos
+switched to db correos
+> db
+correos
+> db.createCollection('correos')
+{ "ok" : 1 }
+> db.correos.insert({correo:"test_test8@gmail.com"})
+WriteResult({ "nInserted" : 1 })
+> db.correos.insert({correo:"test_120@gmail.com"})
+WriteResult({ "nInserted" : 1 })
+> db.correos.insert({correo:"test_120@hotmail.mx"})
+WriteResult({ "nInserted" : 1 })
+>
+> db.correos.find()
+{ "_id" : ObjectId("5c4501aa7bf7b0ef6f78b87b"), "correo" : "test_test8@gmail.com" }
+{ "_id" : ObjectId("5c4501b67bf7b0ef6f78b87c"), "correo" : "test_120@gmail.com" }
+{ "_id" : ObjectId("5c4501c67bf7b0ef6f78b87d"), "correo" : "test_120@hotmail.mx" }
+>
+> db.correos.find({correo:/@/})
+{ "_id" : ObjectId("5c4501aa7bf7b0ef6f78b87b"), "correo" : "test_test8@gmail.com" }
+{ "_id" : ObjectId("5c4501b67bf7b0ef6f78b87c"), "correo" : "test_120@gmail.com" }
+{ "_id" : ObjectId("5c4501c67bf7b0ef6f78b87d"), "correo" : "test_120@hotmail.mx" }
+> db.correos.find({correo:/@test/})
+> db.correos.find({correo:/@/})
+{ "_id" : ObjectId("5c4501aa7bf7b0ef6f78b87b"), "correo" : "test_test8@gmail.com" }
+{ "_id" : ObjectId("5c4501b67bf7b0ef6f78b87c"), "correo" : "test_120@gmail.com" }
+{ "_id" : ObjectId("5c4501c67bf7b0ef6f78b87d"), "correo" : "test_120@hotmail.mx" }
+> db.correos.find({correo:/.com$/})
+{ "_id" : ObjectId("5c4501aa7bf7b0ef6f78b87b"), "correo" : "test_test8@gmail.com" }
+{ "_id" : ObjectId("5c4501b67bf7b0ef6f78b87c"), "correo" : "test_120@gmail.com" }
+> db.correos.find({correo:/^test/})
+{ "_id" : ObjectId("5c4501aa7bf7b0ef6f78b87b"), "correo" : "test_test8@gmail.com" }
+{ "_id" : ObjectId("5c4501b67bf7b0ef6f78b87c"), "correo" : "test_120@gmail.com" }
+{ "_id" : ObjectId("5c4501c67bf7b0ef6f78b87d"), "correo" : "test_120@hotmail.mx" }
+> db.correos.find({correo:/^test_120/})
+{ "_id" : ObjectId("5c4501b67bf7b0ef6f78b87c"), "correo" : "test_120@gmail.com" }
+{ "_id" : ObjectId("5c4501c67bf7b0ef6f78b87d"), "correo" : "test_120@hotmail.mx" }
+> db.correos.find({correo:/^test_120@g/})
+{ "_id" : ObjectId("5c4501b67bf7b0ef6f78b87c"), "correo" : "test_120@gmail.com" }
+>
+>
+>
+> show dbs
+biblioteca  0.078GB
+correos     0.078GB
+items       0.078GB
+local       0.078GB
+test        0.078GB
+usuarios    0.078GB
+> alumno
+2019-01-20T20:42:31.978-0300 E QUERY    [thread1] ReferenceError: alumno is not defined :
+@(shell):1:1
+
+> alumno{
+... nombre:"Usuario",
+... apellido:"Apellido",
+... edad:22,
+... sexo:"Masculino"
+... }
+2019-01-20T20:43:40.923-0300 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:6
+
+> alumno
+2019-01-20T20:43:43.176-0300 E QUERY    [thread1] ReferenceError: alumno is not defined :
+@(shell):1:1
+
+> alumno={ nombre:"Usuario", apellido:"Apellido", edad:22, sexo:"Masculino" }
+{
+        "nombre" : "Usuario",
+        "apellido" : "Apellido",
+        "edad" : 22,
+        "sexo" : "Masculino"
+}
+> alumno
+{
+        "nombre" : "Usuario",
+        "apellido" : "Apellido",
+        "edad" : 22,
+        "sexo" : "Masculino"
+}
+> matricula={
+... numero:12345,
+... año:2016,
+... renovada:false
+... }
+{ "numero" : 12345, "año" : 2016, "renovada" : false }
+> matricula
+{ "numero" : 12345, "año" : 2016, "renovada" : false }
+>
+> alumno.matricula = matricula
+{ "numero" : 12345, "año" : 2016, "renovada" : false }
+> alumno
+{
+        "nombre" : "Usuario",
+        "apellido" : "Apellido",
+        "edad" : 22,
+        "sexo" : "Masculino",
+        "matricula" : {
+                "numero" : 12345,
+                "año" : 2016,
+                "renovada" : false
+        }
+}
+> use alumnos
+switched to db alumnos
+> db
+alumnos
+> db.createCollection('alumnos')
+{ "ok" : 1 }
+> db.alumnos.insert(alumno)
+WriteResult({ "nInserted" : 1 })
+> db.alumnos.find()
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "nombre" : "Usuario", "apellido" : "Apellido", "edad" : 22, "sexo" : "Ma
+sculino", "matricula" : { "numero" : 12345, "año" : 2016, "renovada" : false } }
+> matricula
+{ "numero" : 12345, "año" : 2016, "renovada" : false }
+>
+> db.alumnos.find()
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "nombre" : "Usuario", "apellido" : "Apellido", "edad" : 22, "sexo" : "Ma
+sculino", "matricula" : { "numero" : 12345, "año" : 2016, "renovada" : false } }
+>
+> db.alumnos.find({"matricula.numero":"12345"})
+> db.alumnos.find({"matricula.numero":"12345"})
+> db.alumnos.find({"matricula.numero":12345})
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "nombre" : "Usuario", "apellido" : "Apellido", "edad" : 22, "sexo" : "Ma
+sculino", "matricula" : { "numero" : 12345, "año" : 2016, "renovada" : false } }
+> db.alumnos.find({"matricula.numero":12345})
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "nombre" : "Usuario", "apellido" : "Apellido", "edad" : 22, "sexo" : "Ma
+sculino", "matricula" : { "numero" : 12345, "año" : 2016, "renovada" : false } }
+> db.alumnos.find({matricula.numero:12345})
+2019-01-20T21:15:15.163-0300 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:26
+
+> db.alumnos.find({"matricula.numero":12345})
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "nombre" : "Usuario", "apellido" : "Apellido", "edad" : 22, "sexo" : "Ma
+sculino", "matricula" : { "numero" : 12345, "año" : 2016, "renovada" : false } }
+> db.alumnos.find({"matricula.numero":12345},{"matricula.":true})
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "matricula" : { "numero" : 12345, "año" : 2016, "renovada" : false } }
+> db.alumnos.find({"matricula.numero":12345},{"matricula.año":true})
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "matricula" : { "año" : 2016 } }
+> db.alumnos.update({}, {$set:{"matricula.año":2017}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.alumnos.find({"matricula.numero":12345},{"matricula.año":true})
+{ "_id" : ObjectId("5c4509287bf7b0ef6f78b87e"), "matricula" : { "año" : 2017 } }
+> db.alumnos.remove({"matricula.renovada":false})
+WriteResult({ "nRemoved" : 1 })
+> db.alumnos.find()
+>
+>
+>
+> db.alumnos.find()
+> show dbs
+alumnos     0.078GB
+biblioteca  0.078GB
+correos     0.078GB
+items       0.078GB
+local       0.078GB
+test        0.078GB
+usuarios    0.078GB
+>
+> db
+alumnos
+>
+> una = {direccion: "direccion  uno"}
+{ "direccion" : "direccion  uno" }
+> dos = {direccion: "direccion dos"}
+{ "direccion" : "direccion dos" }
+> tres = {direccion: "direccion tres"}
+{ "direccion" : "direccion tres" }
+>
+> uno
+{ "nombre" : "Test uno" }
+> dos
+{ "direccion" : "direccion dos" }
+> tres
+{ "direccion" : "direccion tres" }
+>
+> trabajador_dos{
+... }
+2019-01-21T17:25:20.957-0300 E QUERY    [thread1] SyntaxError: missing ; before statement @(shell):1:14
+
+> trabajador_dos = {
+... nombre: "trabajador",
+... edad:33,
+... direccion_uno:uno,
+... direccion_dos:dos,
+... direccion_tres:tres
+... }
+{
+        "nombre" : "trabajador",
+        "edad" : 33,
+        "direccion_uno" : {
+                "nombre" : "Test uno"
+        },
+        "direccion_dos" : {
+                "direccion" : "direccion dos"
+        },
+        "direccion_tres" : {
+                "direccion" : "direccion tres"
+        }
+}
+> trabajador = {
+... nombre:"trabajador",
+... edad:33
+... }
+{ "nombre" : "trabajador", "edad" : 33 }
+> trabajador.direcciones=[uno, dos, tres]
+[
+        {
+                "nombre" : "Test uno"
+        },
+        {
+                "direccion" : "direccion dos"
+        },
+        {
+                "direccion" : "direccion tres"
+        }
+]
+> trabajador
+{
+        "nombre" : "trabajador",
+        "edad" : 33,
+        "direcciones" : [
+                {
+                        "nombre" : "Test uno"
+                },
+                {
+                        "direccion" : "direccion dos"
+                },
+                {
+                        "direccion" : "direccion tres"
+                }
+        ]
+}
+> trabajador_dos
+{
+        "nombre" : "trabajador",
+        "edad" : 33,
+        "direccion_uno" : {
+                "nombre" : "Test uno"
+        },
+        "direccion_dos" : {
+                "direccion" : "direccion dos"
+        },
+        "direccion_tres" : {
+                "direccion" : "direccion tres"
+        }
+}
+>
+> show dbs
+alumnos     0.078GB
+biblioteca  0.078GB
+correos     0.078GB
+items       0.078GB
+local       0.078GB
+test        0.078GB
+usuarios    0.078GB
+>
+> use trabajadores
+switched to db trabajadores
+> db
+trabajadores
+> db.createCollection('trabajadores')
+{ "ok" : 1 }
+> db.trabajadores.find()
+>
+>
+> db.trabajadores.insert({nombre:"Juan",apellido:"Pérez",edad:30,sexo:"Masculino",tipo_sangre:"0",cédula:{cedula:9876543
+21,año_registro:2016,año_expiración:2018},direcciones:[{calle:"calle número uno",número:12,piso:4,colonia:"Colonia uno",
+uso:"entrega de paquetes"},{calle:"calle número uno",numero:11,colonia:"Colonia dos",uso:"contacto personal"}],estados:[
+"Casado","Saludable","Sin deudas"]})
+WriteResult({ "nInserted" : 1 })
+>
+> db.trabajadores.find()
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+>
+> db.trabajadores.find().pretty()
+{
+        "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"),
+        "nombre" : "Juan",
+        "apellido" : "Pérez",
+        "edad" : 30,
+        "sexo" : "Masculino",
+        "tipo_sangre" : "0",
+        "cédula" : {
+                "cedula" : 987654321,
+                "año_registro" : 2016,
+                "año_expiración" : 2018
+        },
+        "direcciones" : [
+                {
+                        "calle" : "calle número uno",
+                        "número" : 12,
+                        "piso" : 4,
+                        "colonia" : "Colonia uno",
+                        "uso" : "entrega de paquetes"
+                },
+                {
+                        "calle" : "calle número uno",
+                        "numero" : 11,
+                        "colonia" : "Colonia dos",
+                        "uso" : "contacto personal"
+                }
+        ],
+        "estados" : [
+                "Casado",
+                "Saludable",
+                "Sin deudas"
+        ]
+}
+> db.trabajadores.find({apellido:"Pérez"})
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+> db.trabajadores.find({"cédula.año_registro":2016})
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+>
+>
+> db.trabajadores.find({"direcciones.uso":"contacto personal"})
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+>
+>
+> db.trabajadores.find({direcciones:{$elemMatch:{uso:"contacto personal"}}})
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+> db.trabajadores.find({direcciones:{$elemMatch:{uso:"contacto personal",número:11}}})
+> db.trabajadores.find({direcciones:{$elemMatch:{uso:"contacto personal",numero:11}}})
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+> db.trabajadores.find({direcciones:{$elemMatch:{uso:"contacto personal",número:12}}})
+>
+> db.trabajadores.find({direcciones:{$elemMatch:{uso:"contacto personal",numero:11}}})
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+>
+> db.trabajadores.find({direcciones:{$elemMatch:{uso:"contacto personal",numero:11}}},{_id:false,direcciones:true})
+{ "direcciones" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entre
+ga de paquetes" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal"
+ } ] }
+>
+> db.trabajadores.find({direcciones:{$elemMatch:{uso:"contacto personal",numero:11}}},{_id:false,direcciones:{$elemMatch
+:{uso:"contacto personal",numero:11}}})
+{ "direcciones" : [ { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal
+" } ] }
+>
+>
+> db.trabajadores.find()
+{ "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"), "nombre" : "Juan", "apellido" : "Pérez", "edad" : 30, "sexo" : "Masculin
+o", "tipo_sangre" : "0", "cédula" : { "cedula" : 987654321, "año_registro" : 2016, "año_expiración" : 2018 }, "direccion
+es" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entrega de paquet
+es" }, { "calle" : "calle número uno", "numero" : 11, "colonia" : "Colonia dos", "uso" : "contacto personal" } ], "estad
+os" : [ "Casado", "Saludable", "Sin deudas" ] }
+>
+>
+> db.trabajadores.find().pretty()
+{
+        "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"),
+        "nombre" : "Juan",
+        "apellido" : "Pérez",
+        "edad" : 30,
+        "sexo" : "Masculino",
+        "tipo_sangre" : "0",
+        "cédula" : {
+                "cedula" : 987654321,
+                "año_registro" : 2016,
+                "año_expiración" : 2018
+        },
+        "direcciones" : [
+                {
+                        "calle" : "calle número uno",
+                        "número" : 12,
+                        "piso" : 4,
+                        "colonia" : "Colonia uno",
+                        "uso" : "entrega de paquetes"
+                },
+                {
+                        "calle" : "calle número uno",
+                        "numero" : 11,
+                        "colonia" : "Colonia dos",
+                        "uso" : "contacto personal"
+                }
+        ],
+        "estados" : [
+                "Casado",
+                "Saludable",
+                "Sin deudas"
+        ]
+}
+>
+>
+> db.trabajadores.update({"direcciones.número":12},{_id:false,direcciones:{$elemMatch:{número:12}}})
+2019-01-21T18:36:40.561-0300 E QUERY    [thread1] Error: field names cannot start with $ [$elemMatch] :
+DBCollection.prototype._validateForStorage@src/mongo/shell/collection.js:252:1
+DBCollection.prototype._validateForStorage@src/mongo/shell/collection.js:256:13
+DBCollection.prototype._validateUpdateDoc@src/mongo/shell/collection.js:491:9
+Bulk/findOperations.updateOne@src/mongo/shell/bulk_api.js:681:17
+DBCollection.prototype.update@src/mongo/shell/collection.js:561:13
+@(shell):1:1
+
+> db.trabajadores.find({"direcciones.número":12},{_id:false,direcciones:{$elemMatch:{número:12}}})
+{ "direcciones" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entre
+ga de paquetes" } ] }
+>
+> db.trabajadores.find({"direcciones.número":12},{_id:false,"direcciones.$"})
+2019-01-21T18:39:28.824-0300 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:73
+
+> db.trabajadores.find({"direcciones.número":12},{_id:false,"direcciones.$":true})
+{ "direcciones" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entre
+ga de paquetes" } ] }
+>
+> db.trabajadores.find({"direcciones.número":{$gt:10}},{_id:false,"direcciones.$":true})
+{ "direcciones" : [ { "calle" : "calle número uno", "número" : 12, "piso" : 4, "colonia" : "Colonia uno", "uso" : "entre
+ga de paquetes" } ] }
+>
+> db.trabajadores.update({"direcciones.número":12},{$set:{"direcciones.$":{número:999}}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.trabajadores.find().pretty()
+{
+        "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"),
+        "nombre" : "Juan",
+        "apellido" : "Pérez",
+        "edad" : 30,
+        "sexo" : "Masculino",
+        "tipo_sangre" : "0",
+        "cédula" : {
+                "cedula" : 987654321,
+                "año_registro" : 2016,
+                "año_expiración" : 2018
+        },
+        "direcciones" : [
+                {
+                        "número" : 999
+                },
+                {
+                        "calle" : "calle número uno",
+                        "numero" : 11,
+                        "colonia" : "Colonia dos",
+                        "uso" : "contacto personal"
+                }
+        ],
+        "estados" : [
+                "Casado",
+                "Saludable",
+                "Sin deudas"
+        ]
+}
+> db.trabajadores.update({"direcciones.numero":11},{$set:{"direcciones.$.uso":{"cambio de uso"}}})
+2019-01-21T18:52:34.763-0300 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:92
+
+> db.trabajadores.update({"direcciones.numero":11},{$set:{"direcciones.$.uso":{"cambio de uso"}})
+... }
+2019-01-21T18:52:47.627-0300 E QUERY    [thread1] SyntaxError: missing : after property id @(shell):1:92
+
+> db.trabajadores.update({"direcciones.numero":11},{$set:{"direcciones.$.uso":"cambio de uso"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.trabajadores.find().pretty()
+{
+        "_id" : ObjectId("5c4632137bf7b0ef6f78b87f"),
+        "nombre" : "Juan",
+        "apellido" : "Pérez",
+        "edad" : 30,
+        "sexo" : "Masculino",
+        "tipo_sangre" : "0",
+        "cédula" : {
+                "cedula" : 987654321,
+                "año_registro" : 2016,
+                "año_expiración" : 2018
+        },
+        "direcciones" : [
+                {
+                        "número" : 999
+                },
+                {
+                        "calle" : "calle número uno",
+                        "numero" : 11,
+                        "colonia" : "Colonia dos",
+                        "uso" : "cambio de uso"
+                }
+        ],
+        "estados" : [
+                "Casado",
+                "Saludable",
+                "Sin deudas"
+        ]
+}
+> use manzanas
+switched to db manzanas
+> db
+manzanas
+> db.createCollection('manzanas')
+{ "ok" : 1 }
+> db.manzanas.insert({nombre:"McIntosh",valor:12,venta:true})
+WriteResult({ "nInserted" : 1 })
+> db.manzanas.insert({nombre:"Empire",valor:13,venta:true})
+WriteResult({ "nInserted" : 1 })
+> db.manzanas.insert({nombre:"Red Rome",valor:15,venta:true})
+WriteResult({ "nInserted" : 1 })
+> db.manzanas.insert({nombre:"Reineta",valor:10,venta:false})
+WriteResult({ "nInserted" : 1 })
+> db.manzanas.insert({nombre:"Fuji",valor:10,venta:true})
+WriteResult({ "nInserted" : 1 })
+> db.manzanas.insert({nombre:"Royal Gala",valor:50,venta:true})
+WriteResult({ "nInserted" : 1 })
+> db.manzanas.insert({nombre:"Delicious",valor:2,venta:false})
+WriteResult({ "nInserted" : 1 })
+>
+> db.manzanas.find()
+{ "_id" : ObjectId("5c4643bb7bf7b0ef6f78b880"), "nombre" : "McIntosh", "valor" : 12, "venta" : true }
+{ "_id" : ObjectId("5c4643dc7bf7b0ef6f78b881"), "nombre" : "Empire", "valor" : 13, "venta" : true }
+{ "_id" : ObjectId("5c4643eb7bf7b0ef6f78b882"), "nombre" : "Red Rome", "valor" : 15, "venta" : true }
+{ "_id" : ObjectId("5c4644157bf7b0ef6f78b883"), "nombre" : "Reineta", "valor" : 10, "venta" : false }
+{ "_id" : ObjectId("5c4644297bf7b0ef6f78b884"), "nombre" : "Fuji", "valor" : 10, "venta" : true }
+{ "_id" : ObjectId("5c46443d7bf7b0ef6f78b885"), "nombre" : "Royal Gala", "valor" : 50, "venta" : true }
+{ "_id" : ObjectId("5c46449a7bf7b0ef6f78b886"), "nombre" : "Delicious", "valor" : 2, "venta" : false }
+>
+> var documento = {_id:"Nuevo Id", name:"otro"}
+> show dbs
+alumnos       0.078GB
+biblioteca    0.078GB
+correos       0.078GB
+items         0.078GB
+local         0.078GB
+manzanas      0.078GB
+test          0.078GB
+trabajadores  0.078GB
+usuarios      0.078GB
+> use test
+switched to db test
+> db
+test
+> db.test.find()
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 100 }
+Type "it" for more
+> db.test.insert(documento)
+WriteResult({ "nInserted" : 1 })
+> db.test.find()
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b811"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b812"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b813"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b814"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b815"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b816"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b817"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b818"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b819"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b81f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b820"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b821"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b822"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b823"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b824"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b825"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b826"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b827"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b828"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b829"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b82f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b830"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b831"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b832"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b833"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b834"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b835"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b836"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b837"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b838"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b839"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b83f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b840"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b841"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b842"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b843"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b844"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b845"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b846"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b847"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b848"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b849"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84c"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b84f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b850"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b851"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b852"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b853"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b854"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b855"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b856"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b857"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b858"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b859"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b85f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b860"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b861"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b862"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b863"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b864"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b865"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b866"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b867"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b868"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b869"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86a"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86b"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86c"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86d"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86e"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b86f"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b870"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b871"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b872"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b873"), "valor" : 100 }
+{ "_id" : ObjectId("5c44f1407bf7b0ef6f78b874"), "valor" : 100 }
+Type "it" for more
+> it
+{ "_id" : "Nuevo Id", "name" : "otro" }
+> db.test.find({name:"otro"})
+{ "_id" : "Nuevo Id", "name" : "otro" }
+>
+> new ObjectId()
+ObjectId("5c4646d67bf7b0ef6f78b887")
+>
+>
+>
+>
+>
+> db.test.delete({name:"otro"})
+2019-01-21T19:29:22.345-0300 E QUERY    [thread1] TypeError: db.test.delete is not a function :
+@(shell):1:1
+
+> db.test.remove({name:"otro"})
+WriteResult({ "nRemoved" : 1 })
+>
+>
+> show dbs
+alumnos       0.078GB
+biblioteca    0.078GB
+correos       0.078GB
+items         0.078GB
+local         0.078GB
+manzanas      0.078GB
+test          0.078GB
+trabajadores  0.078GB
+usuarios      0.078GB
+> use prueba
+switched to db prueba
+> db
+prueba
+> db.createCollection("Prueba_C",
+... {
+... validator:{$and:
+... [
+... {nombre:{$type:"string"}}
+... {sexo:{$in:["M","F"]}}
+... }
+... }
+... }
+2019-01-21T19:33:03.144-0300 E QUERY    [thread1] SyntaxError: missing ] after element list @(shell):6:0
+
+> db.createCollection("Prueba_C", { validator:{$and: [ {nombre:{$type:"string"}} {sexo:{$in:["M","F"]}}]}})
+2019-01-21T19:33:26.956-0300 E QUERY    [thread1] SyntaxError: missing ] after element list @(shell):1:79
+
+> db.createCollection("Prueba_C", { validator:{$and: [ {nombre:{$type:"string"}}, {sexo:{$in:["M","F"]}}]}})
+{ "ok" : 1 }
+> show collections
+Prueba_C
+system.indexes
+> db
+prueba
+> var documento = {nombre:12,sexo:"M"}
+> db.Prueba_C.insert(documento)
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+> db.createCollection("Prueba_D", { validator:{$and: [ {nombre:{$type:"string"}}, {sexo:{$in:["M","F"]}},{email:{$regex:
+ /@/}}]}})
+{ "ok" : 1 }
+> show collections
+Prueba_C
+Prueba_D
+system.indexes
+> var documento = {nombre:"Eduardo Ismael",sexo:"M",email:"eduardo.com"}
+> db.Prueba_D.insert(documento)
+WriteResult({
+        "nInserted" : 0,
+        "writeError" : {
+                "code" : 121,
+                "errmsg" : "Document failed validation"
+        }
+})
+> var documento = {nombre:"Eduardo Ismael",sexo:"M",email:"eduardo@gmail.com"}
+> db.Prueba_D.insert(documento)
+WriteResult({ "nInserted" : 1 })
+> db.Prueba_D.find()
+{ "_id" : ObjectId("5c464c127bf7b0ef6f78b88a"), "nombre" : "Eduardo Ismael", "sexo" : "M", "email" : "eduardo@gmail.com"
+ }
+> db.createCollection("Prueba_E", { validator:{$and: [ {nombre:{$type:"string"}}, {sexo:{$in:["M","F"]}},{email:{$regex:
+ /@/}},{telefino:{$exists:false}}]}})
+{ "ok" : 1 }
+> db.Prueba_E.insert(documento)
+WriteResult({ "nInserted" : 1 })
+> db.Prueba_E.find()
+{ "_id" : ObjectId("5c464cad7bf7b0ef6f78b88b"), "nombre" : "Eduardo Ismael", "sexo" : "M", "email" : "eduardo@gmail.com"
+ }
+>
+> show dbs
+alumnos       0.078GB
+biblioteca    0.078GB
+correos       0.078GB
+items         0.078GB
+local         0.078GB
+manzanas      0.078GB
+prueba        0.078GB
+test          0.078GB
+trabajadores  0.078GB
+usuarios      0.078GB
+> use usuarios
+switched to db usuarios
+>
+> db
+usuarios
+> db.usuarios.find()
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "Eduardo", "ejemplo" : [ "MongoDB", "C#", "SQL", "Java", "Pyt
+hon" ] }
+{ "_id" : ObjectId("5c44fc157bf7b0ef6f78b876"), "nombre" : "dos", "ejemplo" : [ "XML", "Go" ] }
+> db.usuarios.find().limit(1)
+{ "_id" : ObjectId("5c44f6017bf7b0ef6f78b875"), "nombre" : "Eduardo", "ejemplo" : [ "MongoDB", "C#", "SQL", "Java", "Pyt
+hon" ] }
+>
+> db.usuarios.find().explain()
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "usuarios.usuarios",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "$and" : [ ]
+                },
+                "winningPlan" : {
+                        "stage" : "COLLSCAN",
+                        "filter" : {
+                                "$and" : [ ]
+                        },
+                        "direction" : "forward"
+                },
+                "rejectedPlans" : [ ]
+        },
+        "serverInfo" : {
+                "host" : "Fabian-PC",
+                "port" : 27017,
+                "version" : "3.2.22",
+                "gitVersion" : "105acca0d443f9a47c1a5bd608fd7133840a58dd"
+        },
+        "ok" : 1
+}
+> db.usuarios.find().explain("executionStats")
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "usuarios.usuarios",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "$and" : [ ]
+                },
+                "winningPlan" : {
+                        "stage" : "COLLSCAN",
+                        "filter" : {
+                                "$and" : [ ]
+                        },
+                        "direction" : "forward"
+                },
+                "rejectedPlans" : [ ]
+        },
+        "executionStats" : {
+                "executionSuccess" : true,
+                "nReturned" : 2,
+                "executionTimeMillis" : 0,
+                "totalKeysExamined" : 0,
+                "totalDocsExamined" : 2,
+                "executionStages" : {
+                        "stage" : "COLLSCAN",
+                        "filter" : {
+                                "$and" : [ ]
+                        },
+                        "nReturned" : 2,
+                        "executionTimeMillisEstimate" : 0,
+                        "works" : 4,
+                        "advanced" : 2,
+                        "needTime" : 1,
+                        "needYield" : 0,
+                        "saveState" : 0,
+                        "restoreState" : 0,
+                        "isEOF" : 1,
+                        "invalidates" : 0,
+                        "direction" : "forward",
+                        "docsExamined" : 2
+                }
+        },
+        "serverInfo" : {
+                "host" : "Fabian-PC",
+                "port" : 27017,
+                "version" : "3.2.22",
+                "gitVersion" : "105acca0d443f9a47c1a5bd608fd7133840a58dd"
+        },
+        "ok" : 1
+}
+> db.usuarios.find().explain("executionStats").executionStats.executionTimeMillis
+0
+> db.usuarios.find().explain("executionStats").executionStats.totalDocsExamined
+2
+> db.usuarios.find().explain("executionStats").executionStats.executionTimeMillis
+0
+> db.usuarios.createIndex({nombre:1})
+{
+        "createdCollectionAutomatically" : false,
+        "numIndexesBefore" : 1,
+        "numIndexesAfter" : 2,
+        "ok" : 1
+}
+>
+>

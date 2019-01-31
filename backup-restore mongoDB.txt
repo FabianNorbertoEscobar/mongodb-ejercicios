@@ -1,0 +1,77 @@
+Windows PowerShell
+Copyright (C) 2013 Microsoft Corporation. Todos los derechos reservados.
+
+PS C:\Users\Fabian> cd .\Desktop
+PS C:\Users\Fabian\Desktop> mongodump --db prueba
+2019-01-21T20:22:47.113-0300    writing prueba.system.indexes to
+2019-01-21T20:22:47.299-0300    done dumping prueba.system.indexes (3 documents)
+2019-01-21T20:22:47.314-0300    writing prueba.Prueba_E to
+2019-01-21T20:22:47.315-0300    writing prueba.Prueba_C to
+2019-01-21T20:22:47.315-0300    writing prueba.Prueba_D to
+2019-01-21T20:22:47.417-0300    done dumping prueba.Prueba_C (0 documents)
+2019-01-21T20:22:47.466-0300    done dumping prueba.Prueba_E (1 document)
+2019-01-21T20:22:47.467-0300    done dumping prueba.Prueba_D (1 document)
+PS C:\Users\Fabian\Desktop> cd ..
+PS C:\Users\Fabian> cd .\Downloads
+PS C:\Users\Fabian\Downloads> mongorestore --db prueba dump/prueba
+2019-01-21T20:26:27.743-0300    building a list of collections to restore from dump\prueba dir
+2019-01-21T20:26:27.782-0300    reading metadata for prueba.Prueba_D from dump\prueba\Prueba_D.metadata.json
+2019-01-21T20:26:27.783-0300    restoring prueba.Prueba_D from dump\prueba\Prueba_D.bson
+2019-01-21T20:26:27.785-0300    reading metadata for prueba.Prueba_E from dump\prueba\Prueba_E.metadata.json
+2019-01-21T20:26:27.786-0300    reading metadata for prueba.Prueba_C from dump\prueba\Prueba_C.metadata.json
+2019-01-21T20:26:27.787-0300    restoring prueba.Prueba_E from dump\prueba\Prueba_E.bson
+2019-01-21T20:26:27.793-0300    restoring prueba.Prueba_C from dump\prueba\Prueba_C.bson
+2019-01-21T20:26:27.797-0300    restoring indexes for collection prueba.Prueba_C from metadata
+2019-01-21T20:26:27.802-0300    finished restoring prueba.Prueba_C (0 documents)
+2019-01-21T20:26:27.806-0300    error: E11000 duplicate key error index: prueba.Prueba_D.$_id_ dup key: { : ObjectId('5c
+464c127bf7b0ef6f78b88a') }
+2019-01-21T20:26:27.806-0300    restoring indexes for collection prueba.Prueba_D from metadata
+2019-01-21T20:26:27.807-0300    error: E11000 duplicate key error index: prueba.Prueba_E.$_id_ dup key: { : ObjectId('5c
+464cad7bf7b0ef6f78b88b') }
+2019-01-21T20:26:27.807-0300    restoring indexes for collection prueba.Prueba_E from metadata
+2019-01-21T20:26:27.808-0300    finished restoring prueba.Prueba_D (1 document)
+2019-01-21T20:26:27.808-0300    finished restoring prueba.Prueba_E (1 document)
+2019-01-21T20:26:27.809-0300    done
+PS C:\Users\Fabian> cd .\Downloads
+PS C:\Users\Fabian\Downloads> mongodump --host "Fabian-PC" --port 27017
+2019-01-21T21:13:42.272-0300    writing correos.system.indexes to
+2019-01-21T21:13:42.290-0300    done dumping correos.system.indexes (1 document)
+2019-01-21T21:13:42.293-0300    writing items.system.indexes to
+2019-01-21T21:13:42.333-0300    done dumping items.system.indexes (1 document)
+2019-01-21T21:13:42.435-0300    writing prueba.system.indexes to
+2019-01-21T21:13:42.437-0300    done dumping prueba.system.indexes (3 documents)
+2019-01-21T21:13:42.466-0300    writing usuarios.system.indexes to
+2019-01-21T21:13:42.471-0300    done dumping usuarios.system.indexes (2 documents)
+2019-01-21T21:13:42.473-0300    writing alumnos.system.indexes to
+2019-01-21T21:13:42.479-0300    done dumping alumnos.system.indexes (1 document)
+2019-01-21T21:13:42.493-0300    writing biblioteca.system.indexes to
+2019-01-21T21:13:42.498-0300    done dumping biblioteca.system.indexes (1 document)
+2019-01-21T21:13:42.500-0300    writing trabajadores.system.indexes to
+2019-01-21T21:13:42.502-0300    done dumping trabajadores.system.indexes (1 document)
+2019-01-21T21:13:42.519-0300    writing manzanas.system.indexes to
+2019-01-21T21:13:42.520-0300    done dumping manzanas.system.indexes (1 document)
+2019-01-21T21:13:42.539-0300    writing test.system.indexes to
+2019-01-21T21:13:42.541-0300    done dumping test.system.indexes (1 document)
+2019-01-21T21:13:42.565-0300    writing test.test to
+2019-01-21T21:13:42.572-0300    writing manzanas.manzanas to
+2019-01-21T21:13:42.574-0300    writing items.items to
+2019-01-21T21:13:42.578-0300    done dumping test.test (100 documents)
+2019-01-21T21:13:42.581-0300    writing correos.correos to
+2019-01-21T21:13:42.585-0300    done dumping items.items (4 documents)
+2019-01-21T21:13:42.588-0300    writing usuarios.usuarios to
+2019-01-21T21:13:42.591-0300    done dumping correos.correos (3 documents)
+2019-01-21T21:13:42.593-0300    writing prueba.Prueba_E to
+2019-01-21T21:13:42.595-0300    done dumping manzanas.manzanas (7 documents)
+2019-01-21T21:13:42.597-0300    writing prueba.Prueba_D to
+2019-01-21T21:13:42.600-0300    done dumping usuarios.usuarios (2 documents)
+2019-01-21T21:13:42.602-0300    writing trabajadores.trabajadores to
+2019-01-21T21:13:42.604-0300    done dumping prueba.Prueba_E (1 document)
+2019-01-21T21:13:42.606-0300    writing alumnos.alumnos to
+2019-01-21T21:13:42.607-0300    done dumping prueba.Prueba_D (1 document)
+2019-01-21T21:13:42.609-0300    writing prueba.Prueba_C to
+2019-01-21T21:13:42.611-0300    done dumping trabajadores.trabajadores (1 document)
+2019-01-21T21:13:42.612-0300    done dumping alumnos.alumnos (0 documents)
+2019-01-21T21:13:42.614-0300    done dumping prueba.Prueba_C (0 documents)
+2019-01-21T21:13:42.619-0300    writing biblioteca.libros to
+2019-01-21T21:13:42.647-0300    done dumping biblioteca.libros (7 documents)
+PS C:\Users\Fabian\Downloads>
